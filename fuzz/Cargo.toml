@@ -1,0 +1,25 @@
+[package]
+name = "rc5_test-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2018"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+rc5 = { path = ".."}
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[profile.release]
+debug = 1
+
+[[bin]]
+name = "rc5"
+path = "fuzz_targets/rc5.rs"
+test = false
+doc = false
